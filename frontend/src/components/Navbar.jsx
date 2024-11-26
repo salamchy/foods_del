@@ -1,8 +1,27 @@
-import LOGO from "/logo.png";
+import { useEffect, useState } from "react";
+import LOGO from "../assets/logo.png";
 import { BiPhoneCall } from "react-icons/bi";
 
 const Navbar = () => {
+  const [isSticky, setSticky] = useState(false);
 
+  //handle scroll function
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 0) {
+        setSticky(true)
+      } else {
+        setSticky(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.addEventListener("scroll", handleScroll);
+    }
+  }, []);
   const navItems = <>
     <li><a>Home</a></li>
     <li>
@@ -29,8 +48,8 @@ const Navbar = () => {
   </>
 
   return (
-    <header className="max-w-screen-2xl container mx-auto">
-      <div className="navbar xl:px-24">
+    <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out">
+      <div className={`navbar xl:px-24 ${isSticky ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out" : ""}`}>
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -97,7 +116,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <a className="btn bg-green rounded-full px-6 text-white flex items-center gap-2 "><BiPhoneCall /> Contact</a>
+          <a className="btn bg-green rounded-full px-6 text-white flex items-center gap-2 border-none"><BiPhoneCall /> Contact</a>
         </div>
       </div>
     </header>
