@@ -1,7 +1,7 @@
-import CategoryImg1 from "../../assets/images/home/category/img1.png";
-import CategoryImg2 from "../../assets/images/home/category/img2.png";
-import CategoryImg3 from "../../assets/images/home/category/img3.png";
-import CategoryImg4 from "../../assets/images/home/category/img4.png";
+import CategoryImg1 from "/images/home/category/img1.png";
+import CategoryImg2 from "/images/home/category/img2.png";
+import CategoryImg3 from "/images/home/category/img3.png";
+import CategoryImg4 from "/images/home/category/img4.png";
 
 const categoryItems = [
   { id: 1, title: "Main Dish", des: "(86 dishes)", image: CategoryImg1 },
