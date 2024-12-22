@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LOGO from "../assets/logo.png";
-import { BiPhoneCall } from "react-icons/bi";
+import { FaRegUser } from "react-icons/fa";
+import Modal from "./Modal";
+import { AuthContext } from "../contexts/AuthProvider";
+import Profile from "./Profile";
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
+
+  const { user } = useContext(AuthContext);
+
 
   //handle scroll function
   useEffect(() => {
@@ -23,12 +29,12 @@ const Navbar = () => {
     }
   }, []);
   const navItems = <>
-    <li><a>Home</a></li>
+    <li><a className="text-green" href="/">Home</a></li>
     <li>
       <details>
         <summary>Menu</summary>
         <ul className="p-2">
-          <li><a>All</a></li>
+          <li><a href="/menu">All</a></li>
           <li><a>Salad</a></li>
           <li><a>Pizza</a></li>
         </ul>
@@ -112,11 +118,15 @@ const Navbar = () => {
                   strokeWidth="2"
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              <span className="badge badge-sm indicator-item">8</span>
+              <span className="badge badge-sm indicator-item text-rose-700">8</span>
             </div>
           </div>
 
-          <a className="btn bg-green rounded-full px-6 text-white flex items-center gap-2 border-none"><BiPhoneCall /> Contact</a>
+          {/* login button */}
+          {
+            user ? <Profile user={user} /> : <button className="btn bg-green rounded-full px-6 text-white flex items-center gap-2 border-none" onClick={() => document.getElementById('my_modal_5').showModal()}><FaRegUser /> Login</button>
+          }
+          <Modal />
         </div>
       </div>
     </header>
